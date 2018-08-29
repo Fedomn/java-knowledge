@@ -12,7 +12,8 @@ subprojects {
   targetCompatibility = 1.8
 
   dependencies {
-    testCompile("junit:junit:4.12")
+    compile("junit:junit:4.12")
+    compile("org.assertj:assertj-core:3.10.0")
   }
 }
 

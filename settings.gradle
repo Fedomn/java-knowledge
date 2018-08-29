@@ -1,3 +1,4 @@
 include 'base-knowledge'
+include 'design-pattern'
 
 rootProject.name = 'java-knowledge'
