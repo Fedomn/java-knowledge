@@ -1,0 +1,21 @@
+defaultTasks 'clean', 'build'
+
+subprojects {
+  repositories {
+    mavenCentral()
+  }
+
+  apply plugin: 'java'
+  apply plugin: 'idea'
+
+  sourceCompatibility = 1.8
+  targetCompatibility = 1.8
+
+  dependencies {
+    testCompile("junit:junit:4.12")
+  }
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '4.8'
+}
