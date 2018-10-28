@@ -1,6 +1,10 @@
 defaultTasks 'clean', 'build'
 
 buildscript {
+  ext {
+    springBootVersion = '2.0.3.RELEASE'
+  }
+
   repositories {
     mavenCentral()
     maven {
@@ -9,6 +13,7 @@ buildscript {
   }
 
   dependencies {
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     classpath("io.franzbecker:gradle-lombok:1.11")
   }
 }

@@ -1,4 +1,5 @@
 include 'base-knowledge'
 include 'design-pattern'
+include 'persistence-hibernate'
 
 rootProject.name = 'java-knowledge'
