@@ -3,6 +3,7 @@ package com.fedomn.repository.autoflush;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -29,6 +30,8 @@ public class Son {
   @GeneratedValue(generator = "customer-uuid")
   @GenericGenerator(name = "customer-uuid", strategy = "org.hibernate.id.UUIDGenerator")
   private String id;
+
+  @Column private String name;
 
   @Builder.Default
   @ToString.Exclude
