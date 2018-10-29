@@ -1,5 +1,10 @@
-package com.fedomn.repository.autoflush;
+package com.fedomn.repository.autoflush.prepareflushaction;
 
+import com.fedomn.repository.autoflush.AttachmentRepository;
+import com.fedomn.repository.autoflush.Father;
+import com.fedomn.repository.autoflush.FatherRepository;
+import com.fedomn.repository.autoflush.Son;
+import com.fedomn.repository.autoflush.SonRepository;
 import java.util.Arrays;
 import javax.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
@@ -14,11 +19,12 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Slf4j
-public class FlushEverythingToExecutionsTest {
+public class PrepareActionQueueTest {
 
   private String fatherId;
 
   @Autowired private FatherRepository fatherRepository;
+  @Autowired private TestClassRepository testClassRepository;
   @Autowired private SonRepository sonRepository;
   @Autowired private AttachmentRepository attachmentRepository;
 
@@ -45,18 +51,20 @@ public class FlushEverythingToExecutionsTest {
     Son son = Son.builder().build();
     father.getSonList().add(son);
 
-    log.info("\033[32m start findAll and will trigger flush \033[0m");
+    log.info("\033[32m start findAll \033[0m");
+    // will not trigger auto flush
+    // but will prepare flush action
+    testClassRepository.findAll();
+    log.info("\033[32m end findAll \033[0m");
 
-    // will insert son with null name
-    // because in DefaultAutoFlushEventListener#onAutoFlush method
-    // flushEverythingToExecutions(source) will prepare entity flush
-    attachmentRepository.findAll();
-
+    log.info("\033[32m start save \033[0m");
     son.setName("saved name");
     fatherRepository.save(father);
+    log.info("\033[32m end save \033[0m");
 
     log.info("\033[32m start flush \033[0m");
-    // will update son name and flush
+    // first will insert into son with null (in insert action)
+    // second will update son name with saved name
     entityManager.flush();
   }
 }
