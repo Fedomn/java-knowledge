@@ -52,9 +52,12 @@ public class FlushEverythingToExecutionsTest {
     // flushEverythingToExecutions(source) will prepare entity flush
     attachmentRepository.findAll();
 
-    log.info("\033[32m start save son name \033[0m");
+    log.info("\033[32m start findAll and will trigger flush \033[0m");
     son.setName("saved name");
-    // will do nothing because father had been flushed
+
     fatherRepository.save(father);
+    log.info("\033[32m start flush \033[0m");
+    // will update son name and flush
+    entityManager.flush();
   }
 }
