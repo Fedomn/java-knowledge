@@ -1,4 +1,4 @@
-package com.fedomn.thread;
+package com.fedomn.concurrent;
 
 /** 创建一个线程里共享的context 即：只要在同一个线程里，就可以获取ThreadLocal里的内容 */
 public class ThreadLocalTest {
