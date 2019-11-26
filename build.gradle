@@ -27,8 +27,8 @@ subprojects {
   apply plugin: 'idea'
   apply plugin: "io.franzbecker.gradle-lombok"
 
-  sourceCompatibility = 1.8
-  targetCompatibility = 1.8
+  sourceCompatibility = 12
+  targetCompatibility = 12
 
   dependencies {
     compile("junit:junit:4.12")
@@ -43,6 +43,6 @@ subprojects {
   }
 }
 
-task wrapper(type: Wrapper) {
-  gradleVersion = '4.8'
+wrapper {
+  gradleVersion = '6.0.1'
 }
