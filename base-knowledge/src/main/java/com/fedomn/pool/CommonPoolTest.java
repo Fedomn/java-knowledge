@@ -7,6 +7,8 @@ import org.apache.commons.pool2.impl.DefaultPooledObject;
 import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 
+import java.time.Duration;
+
 public class CommonPoolTest {
 
   private static final int TIME_BETWEEN_EVICTION_RUNS_MILLIS = 1;
@@ -19,13 +21,13 @@ public class CommonPoolTest {
     config.setMaxIdle(poolSize);
     config.setMaxTotal(poolSize);
     config.setMinIdle(poolSize);
-    config.setTimeBetweenEvictionRunsMillis(TIME_BETWEEN_EVICTION_RUNS_MILLIS);
+    config.setTimeBetweenEvictionRuns(Duration.ofMillis(TIME_BETWEEN_EVICTION_RUNS_MILLIS));
     config.setTestOnBorrow(true);
     config.setTestWhileIdle(true);
     config.setTestOnReturn(true);
     config.setFairness(true);
-    config.setMaxWaitMillis(MAX_WAIT_MILLIS);
-    config.setMinEvictableIdleTimeMillis(1000 * 5);
+    config.setMaxWait(Duration.ofMillis(MAX_WAIT_MILLIS));
+    config.setMinEvictableIdleTime(Duration.ofMillis(1000 * 5));
 
     GenericObjectPool<Obj> pool = new ConnectionPool(new PoolFactory(), config);
 

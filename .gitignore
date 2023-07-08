@@ -7,3 +7,4 @@ out/
 *.crt
 *.p12
 *.pem
+gradle/
