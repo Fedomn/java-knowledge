@@ -30,7 +30,8 @@ public class StreamTutorial {
   public void reused_stream() throws Exception {
     // Java 8 streams cannot be reused. As soon as you call any terminal operation the stream is
     // closed
-    // We could create a stream supplier to construct a new stream with all intermediate operations
+    // We could create a stream supplier to construct a new stream with all intermediate
+    // operations
     // already set up
     Supplier<Stream<String>> streamSupplier =
         () -> Stream.of("d2", "a2", "b1", "b3", "c").filter(s -> s.startsWith("a"));
@@ -48,7 +49,8 @@ public class StreamTutorial {
   @Test
   public void collector_of() throws Exception {
     // build our own special collector
-    // We have to pass the four ingredients of a collector: a supplier, an accumulator, a combiner
+    // We have to pass the four ingredients of a collector: a supplier, an accumulator, a
+    // combiner
     // and a finisher.
     List<String> testData = Arrays.asList("a1", "b1", "c1", "d1");
     String result = "A1 | B1 | C1 | D1";
@@ -99,8 +101,7 @@ public class StreamTutorial {
   public void parallel_stream() throws Exception {
     // 默认构造的stream是顺序执行的,调用parallel构造并行的stream
     // 注意并行操作中的线程安全
-    Arrays.asList("a1", "a2", "b1", "c2", "c1")
-        .parallelStream()
+    Arrays.asList("a1", "a2", "b1", "c2", "c1").parallelStream()
         .filter(
             s -> {
               System.out.format("filter: %s [%s]\n", s, Thread.currentThread().getName());

@@ -13,42 +13,22 @@ import org.junit.Test;
 /**
  * 四种Java引用(强 > 软 > 弱 > 虚)
  *
- * <p>
+ * <p>强引用 强引用可以直接访问目标对象，它会尽可能长时间的存活于 JVM 内，当没有任何对象指向它时 GC 执行后将会被回收。
+ * 当内存空间不足，Java虚拟机宁愿抛出OutOfMemoryError错误，使程序异常终止， 也不会靠随意回收具有强引用的对象来解决内存不足的问题 String StrongReference
+ * = new String("StrongReference");
  *
- * 强引用
- * 强引用可以直接访问目标对象，它会尽可能长时间的存活于 JVM 内，当没有任何对象指向它时 GC 执行后将会被回收。
- * 当内存空间不足，Java虚拟机宁愿抛出OutOfMemoryError错误，使程序异常终止，
- * 也不会靠随意回收具有强引用的对象来解决内存不足的问题
- * String StrongReference = new String("StrongReference");
+ * <p>软引用 如果一个对象只具有软引用，则内存空间足够，垃圾回收器就不会回收它；如果内存空间不足了，就会回收这些对象的内存 String sf = new
+ * String("SoftReference"); ReferenceQueue queue = new ReferenceQueue();
+ * 如果软引用所引用的对象被垃圾回收器回收，Java虚拟机就会把这个软引用加入到与之关联的引用队列中 SoftReference<String> softReference = new
+ * SoftReference<String>(sf, queue); sf = null;//清除强引用
  *
- * <p>
+ * <p>弱引用 弱引用与软引用的区别在于：只具有弱引用的对象拥有更短暂的生命周期 当所引用的对象在 JVM 内不再有强引用时，不管当前内存空间足够与否，都会回收它的内存 String wf =
+ * new String("WeakReference"); ReferenceQueue queue = new ReferenceQueue(); WeakReference<String>
+ * weakReference = new WeakReference<String>(wf, queue); wf = null;//清除强引用
  *
- * 软引用
- * 如果一个对象只具有软引用，则内存空间足够，垃圾回收器就不会回收它；如果内存空间不足了，就会回收这些对象的内存
- * String sf = new String("SoftReference");
- * ReferenceQueue queue = new ReferenceQueue();
- * 如果软引用所引用的对象被垃圾回收器回收，Java虚拟机就会把这个软引用加入到与之关联的引用队列中
- * SoftReference<String> softReference = new SoftReference<String>(sf, queue);
- * sf = null;//清除强引用
- *
- * <p>
- *
- * 弱引用
- * 弱引用与软引用的区别在于：只具有弱引用的对象拥有更短暂的生命周期
- * 当所引用的对象在 JVM 内不再有强引用时，不管当前内存空间足够与否，都会回收它的内存
- * String wf = new String("WeakReference");
- * ReferenceQueue queue = new ReferenceQueue();
- * WeakReference<String> weakReference = new WeakReference<String>(wf, queue);
- * wf = null;//清除强引用
- *
- * <p>
- *
- * 虚引用
- * 虚引用并不会决定对象的生命周期。如果一个对象仅持有虚引用，那么它就和没有任何引用一样，在任何时候都可能被垃圾回收器回收
- * 它的 get() 方法永远返回 null.虚引用必须和引用队列联合使用。
- * 当垃圾回收器准备回收一个对象时，如果发现它还有虚引用，就会在回收对象的内存之前，把这个虚引用加入到与之关联的引用队列中
- * String pr = new String("PhantomReference");
- * ReferenceQueue<String> queue = new ReferenceQueue<String>();
+ * <p>虚引用 虚引用并不会决定对象的生命周期。如果一个对象仅持有虚引用，那么它就和没有任何引用一样，在任何时候都可能被垃圾回收器回收 它的 get() 方法永远返回
+ * null.虚引用必须和引用队列联合使用。 当垃圾回收器准备回收一个对象时，如果发现它还有虚引用，就会在回收对象的内存之前，把这个虚引用加入到与之关联的引用队列中 String pr = new
+ * String("PhantomReference"); ReferenceQueue<String> queue = new ReferenceQueue<String>();
  * PhantomReference<String> reference = new PhantomReference<String>(pr, queue);
  */
 public class FourJavaReference {

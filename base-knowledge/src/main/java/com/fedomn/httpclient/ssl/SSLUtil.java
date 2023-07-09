@@ -52,7 +52,9 @@ public class SSLUtil {
   }
 
   public static SSLContext createServerSSLContext(KeyStore keyStore, KeyStore trustStore)
-      throws KeyManagementException, NoSuchAlgorithmException, UnrecoverableKeyException,
+      throws KeyManagementException,
+          NoSuchAlgorithmException,
+          UnrecoverableKeyException,
           KeyStoreException {
     KeyManager[] keyManagers = getKeyManagers(keyStore, PASSWORD);
     TrustManager[] trustManagers = getTrustManagers(trustStore);

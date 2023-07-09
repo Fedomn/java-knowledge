@@ -33,8 +33,7 @@ public class lambda {
     // 例如要找到所有以J开始，长度为四个字母的名字，你可以合并两个Predicate并传入
     Predicate<String> startsWithJ = (n) -> n.startsWith("J");
     Predicate<String> fourLetterLong = (n) -> n.length() == 4;
-    names
-        .stream()
+    names.stream()
         .filter(startsWithJ.and(fourLetterLong))
         .forEach(
             (n) -> System.out.print("nName, which starts with 'J' and four letter long is : " + n));
@@ -51,8 +50,7 @@ public class lambda {
     // 使用lambda表达式
     costBeforeTax.stream().map((cost) -> cost + .12 * cost).forEach(System.out::println);
     double bill =
-        costBeforeTax
-            .stream()
+        costBeforeTax.stream()
             .map((cost) -> cost + .12 * cost)
             .reduce((sum, cost) -> sum + cost)
             .get();

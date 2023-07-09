@@ -10,5 +10,4 @@ public class SpiTest {
     Spi next = load.iterator().next();
     next.test();
   }
-
 }

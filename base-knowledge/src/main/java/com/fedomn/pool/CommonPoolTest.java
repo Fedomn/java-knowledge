@@ -1,13 +1,12 @@
 package com.fedomn.pool;
 
+import java.time.Duration;
 import org.apache.commons.pool2.BasePooledObjectFactory;
 import org.apache.commons.pool2.PooledObject;
 import org.apache.commons.pool2.PooledObjectFactory;
 import org.apache.commons.pool2.impl.DefaultPooledObject;
 import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
-
-import java.time.Duration;
 
 public class CommonPoolTest {
 
@@ -38,8 +37,7 @@ public class CommonPoolTest {
     Obj obj3 = pool.borrowObject(BORROW_MAX_WAIT_MILLIS);
     pool.returnObject(obj3);
 
-    while (true) {
-    }
+    while (true) {}
   }
 
   public static class Obj {
@@ -62,12 +60,9 @@ public class CommonPoolTest {
     }
   }
 
-
   private static class ConnectionPool extends GenericObjectPool<Obj> {
 
-    public ConnectionPool(
-        PooledObjectFactory<Obj> factory,
-        GenericObjectPoolConfig<Obj> config) {
+    public ConnectionPool(PooledObjectFactory<Obj> factory, GenericObjectPoolConfig<Obj> config) {
       super(factory, config);
     }
 
